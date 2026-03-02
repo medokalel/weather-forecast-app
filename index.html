@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="author" content="Mohamed Sayedahmed Mohamed Khalel">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&family=Source+Sans+3:ital,wght@0,200..900;1,200..900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/all.min.css">
+    <title>Weather</title>
+</head>
+<body>
+    
+    <header>
+        <nav>
+            <div class="header-nav">
+                <div class="header-logo">
+                    <div class="header-image">
+                        <a href="index.html"><img src="images/logo.png" alt="Weather"></a>
+                        
+                    </div>
+                    <div class="header-text">
+                        <a href="index.html"><h1>Weather</h1></a>
+                        <small>tagline goes here</small>
+                    </div>
+                </div>
+                <div id="navLinks">
+                    <div class="burger" id="bur">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </div>
+                    <ul>
+                        <a class="active" href="index.html"><li> Home </li></a>
+                        <a href="#"><li> News </li></a>
+                        <a href="#"><li> Live cameras </li></a>
+                        <a href="#"><li> Photo </li></a>
+                        <a href="contact.html"><li> Contact </li></a>
+                    </ul>
+                </div>
+            </div>
+            <div id="sec-ul" class="sec-ul">
+                <ul>
+                    <a class="active" href="index.html"><li> Home </li></a>
+                    <a href="#"><li> News </li></a>
+                    <a href="#"><li> Live cameras </li></a>
+                    <a href="#"><li> Photo </li></a>
+                    <a href="contact.html"><li> Contact </li></a>
+                </ul>
+            </div>
+        </nav>
+    </header>
+    <main>
+        <section class="hero">
+            <div class="back-img"></div>
+            <div class="search-box">
+                <input id="search-input" type="search" name="search" placeholder="Find your location..">
+                <button id="search-button" type="submit">Find</button>
+            </div>
+            <div class="cards">
+                <div class="card card1">
+                    <div class="header-card">
+                        <h2>Wednesday</h2>
+                        <h2>25February</h2>
+                    </div>
+                    <div class="body-card">
+                        <div class="location">
+                            Cairo
+                        </div>
+                        <div class="degree">
+                            <div class="num">
+                                16.3<sup>o</sup>C 
+                            </div>
+                            <img src="images/113.png" alt="png">
+                        </div>
+                        <div class="custom">Party cloudy</div>
+                        <span>
+                            <img src="images/icon-umberella.png" alt="umberella">
+                            20%
+                        </span>
+                        <span>
+                            <img src="images/icon-wind.png" alt="wind">
+                            18km/h
+                        </span>
+                        <span>
+                            <img src="images/icon-compass.png" alt="compass">
+                            East
+                        </span>
+                    </div>
+                </div>
+                <div class="card card2">
+                    <div class="header-card">
+                        <h2>Wednesday</h2>
+                    </div>
+                    <div class="forecast">
+                        <div class="forecast-content">
+                            <div class="forecast-icon">
+                                <img src="images/sun.png" alt="sun">
+                            </div>
+                            <div class="degree">
+                                22.4<sup>o</sup>c
+                            </div>
+                            <small>12.7<sup>o</sup></small>
+                            <div class="custom">
+                                Sunny
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card card3">
+                    <div class="header-card">
+                        <h2>Friday</h2>
+                    </div>
+                    <div class="forecast">
+                        <div class="forecast-content">
+                            <div class="forecast-icon">
+                                <img src="images/sun-cloud.png" alt="sun-cloud">
+                            </div>
+                            <div class="degree">
+                                19.5<sup>o</sup>c
+                            </div>
+                            <small>10.9<sup>o</sup></small>
+                            <div class="custom">
+                                Parlty Cloudy
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+    <footer>
+        <div>
+            <div class="site">
+                <div class="search-box">
+                    <form action="#">
+                        <input type="email" name="Email" placeholder="Enter your email to subscribe..">
+                        <button type="submit">Subscribe</button>
+                    </form>
+                </div>
+                <div class="social">
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                </div>
+            </div>
+            <p>© 2024 Weather App. All rights reserved.</p>
+        </div>
+    </footer>
+    <script src="js/config.js"></script>
+    <script src="js/script.js"></script>
+</body>
+</html>
