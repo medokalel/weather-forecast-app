@@ -1,16 +1,22 @@
-# Weather forecast
+# Weather Forecast
 
-A three-day weather forecast for any city, built with plain HTML, CSS and JavaScript (no build step, no dependencies). Created as a DEPI training project.
+A three-day weather forecast for any city, built with plain HTML, CSS and JavaScript (no framework, no dependencies). Created as a DEPI training project.
 
-**Features**
+**Live demo:** https://weather-forecast-app.vercel.app
 
-- Search with live city suggestions (WeatherAPI `search.json`), debounced and cancellable
-- Today's conditions plus the next two days, with rain chance, wind and "feels like"
-- °C / °F toggle (no extra request: both units come back in the same response)
+## Features
+
+- City search with live suggestions (WeatherAPI `search.json`), debounced and cancellable
+- Today's conditions plus the next two days: rain chance, wind and "feels like"
+- °C / °F toggle with no extra request (both units come back in the same response)
 - Remembers your last city and unit between visits
-- "Use my location" button (asks for permission only when clicked)
-- Loading indicator, plain-language error messages, and a saved-forecast fallback when the network fails
-- Keyboard accessible (combobox pattern for search), screen-reader labels, visible focus, reduced-motion support, AA contrast
+- "Use my location" button (the browser only asks for permission when you click it)
+- Loading state, plain-language error messages, and a saved-forecast fallback when the network fails
+- Keyboard accessible (combobox pattern for search), screen-reader labels, visible focus, reduced-motion support
+
+## Built with
+
+HTML5, CSS3 and vanilla JavaScript (ES2015+), with [WeatherAPI.com](https://www.weatherapi.com/) as the data source. Deployed on Vercel.
 
 ## Project structure
 
@@ -19,59 +25,44 @@ index.html
 favicon.svg
 css/style.css
 js/app.js               application code
-js/config.example.js    safe template, committed
+js/config.example.js    template for the local config (committed)
 js/config.js            your real key, NOT committed (see .gitignore)
 assets/                 images and touch icon
-.github/workflows/      optional GitHub Pages deploy
 ```
 
 ## Run locally
 
 1. Get a free API key at <https://www.weatherapi.com/>.
-2. Create your local config:
+2. Create your local config and paste your key into it:
    ```bash
    cp js/config.example.js js/config.js
    ```
-   Open `js/config.js` and replace `YOUR_API_KEY_HERE` with your key.
-3. Serve the folder (opening `index.html` directly also works, but a server matches production):
+3. Serve the folder:
    ```bash
    python3 -m http.server 8000
    ```
-   Then visit <http://localhost:8000>.
+   Then open <http://localhost:8000>.
 
 If the key is missing, the page tells you what to do instead of failing silently.
 
-## API key safety (read this before deploying)
+## Deploy on Vercel
 
-**Rotate the old key.** An earlier version of this project hard-coded a key in `js/script.js`, and it is still visible in the repository's git history. Revoke or regenerate it in the WeatherAPI dashboard. Deleting the file is not enough, because anyone can read old commits.
+`js/config.js` is not committed, so the deployment generates it during the build from an environment variable:
 
-**What `.gitignore` does and does not do.** Ignoring `js/config.js` keeps the key out of your repository. It does not hide the key on a live site: any key used by browser-side JavaScript can be read by visitors in DevTools. For a free-tier key on a portfolio demo that is an accepted trade-off, but treat the key as public and disposable. Check your WeatherAPI dashboard for any usage limits or restrictions your plan offers.
+1. Import the repository in Vercel. Set the preset to **Other** and the output directory to `public`.
+2. Set the build command to:
+   ```bash
+   mkdir -p public && cp -r index.html favicon.svg css js assets public/ && printf 'window.WEATHER_CONFIG = { API_KEY: "%s", API_BASE: "https://api.weatherapi.com/v1", DEFAULT_CITY: "Cairo" };\n' "$WEATHER_API_KEY" > public/js/config.js
+   ```
+3. Add an environment variable `WEATHER_API_KEY` with your key, then deploy.
 
-**Keeping the key private (no code changes needed in this app).** Put a tiny proxy in front of WeatherAPI and keep the key there:
+## About the API key
 
-1. Create a serverless function (Cloudflare Workers, Netlify Functions, Vercel Functions) that forwards `GET /v1/search.json` and `GET /v1/forecast.json` to `https://api.weatherapi.com/v1/...`, adding `key=<secret>` from an environment variable. Restrict it to those two paths and to your site's origin.
-2. In `js/config.js`, set `API_BASE` to the proxy URL and leave `API_KEY` empty. The app then sends no key at all.
-3. Add the proxy's origin to `connect-src` in the Content-Security-Policy `<meta>` tag in `index.html`.
+This is a front-end-only app, so any key it uses can be read by visitors in the browser's DevTools, even though it is not in the repository. Use a free-tier key that is cheap to replace, and regenerate it from the WeatherAPI dashboard if it ever leaks.
 
-Using a bundler such as Vite with `.env` files is a different story: variables prefixed `VITE_` are inlined into the shipped JavaScript, so they are just as visible as `config.js`. Only a server-side proxy truly hides the key.
+To keep the key truly private, put a small serverless proxy in front of WeatherAPI that adds the key on the server. Then set `API_BASE` in `js/config.js` to the proxy URL, leave `API_KEY` empty, and add the proxy origin to `connect-src` in the Content-Security-Policy `<meta>` tag in `index.html`.
 
-## Deploy
-
-**GitHub Pages (included workflow)**
-
-1. In the repository: Settings, Secrets and variables, Actions, add a secret named `WEATHER_API_KEY`.
-2. Settings, Pages, set Source to "GitHub Actions".
-3. Push to `main`. The workflow in `.github/workflows/deploy.yml` writes `js/config.js` from the secret and publishes the site. The key will be visible in the deployed JavaScript (see above).
-
-**Netlify / Vercel / any static host.** Publish the folder as-is, and generate `js/config.js` in the build step from an environment variable, or use the proxy approach above.
-
-## Adding it to your portfolio (MVP)
-
-1. Rotate the old key, add the new one locally in `js/config.js`.
-2. Commit this version and deploy with one of the options above.
-3. Link the live URL and the repo from your portfolio, with a short description and a screenshot. Mention what you handled: request cancellation, debouncing, error states, accessibility.
-
-**Later, if you want to go further:** hourly forecast strip, chart of the three days, favourites list, geolocation on first visit (after explaining why), a proper `og:image` for link previews, localisation of dates and condition text, unit tests for `normalize()` and the formatters, and the serverless proxy.
+An earlier version of this project hard-coded a key in its first commit. That key is revoked; the history is kept as is.
 
 ## Credits
 

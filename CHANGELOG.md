@@ -23,7 +23,7 @@
 - Offline fallback: shows the last saved forecast with a clear warning
 - Favicon (SVG) and Apple touch icon, description / Open Graph / Twitter meta tags, theme colour
 - Content-Security-Policy meta tag, skip link, labelled controls, alt text from condition text, reduced-motion support
-- `.gitignore`, `config.example.js`, README, optional GitHub Pages workflow
+- `.gitignore`, `config.example.js`, README
 
 ### Changed
 - Background photo: 12.6 MB PNG to 354 KB JPEG
