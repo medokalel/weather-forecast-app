@@ -1,156 +1,138 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
+  <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Weather forecast: 3-day forecast for any city</title>
+    <meta name="description" content="A three-day weather forecast for any city, with live search suggestions, Celsius and Fahrenheit units, and your last city remembered. Built with HTML, CSS and JavaScript.">
     <meta name="author" content="Mohamed Sayedahmed Mohamed Khalel">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&family=Source+Sans+3:ital,wght@0,200..900;1,200..900&display=swap" rel="stylesheet">
+    <meta name="theme-color" content="#1E202B">
+    <meta name="color-scheme" content="dark">
+
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Weather forecast">
+    <meta property="og:description" content="Three-day forecast for any city, with search suggestions and a °C/°F toggle.">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="Weather forecast">
+    <meta name="twitter:description" content="Three-day forecast for any city, with search suggestions and a °C/°F toggle.">
+
+    <!-- Blocks everything except this site, the WeatherAPI endpoint and its icon CDN.
+        If you route requests through your own proxy, add its origin to connect-src. -->
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' https://cdn.weatherapi.com data:; connect-src 'self' https://api.weatherapi.com; script-src 'self'; style-src 'self'; base-uri 'none'; form-action 'self'">
+
+    <link rel="icon" href="favicon.svg" type="image/svg+xml">
+    <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
     <link rel="stylesheet" href="css/style.css">
-    <link rel="stylesheet" href="css/all.min.css">
-    <title>Weather</title>
-</head>
-<body>
-    
-    <header>
-        <nav>
-            <div class="header-nav">
-                <div class="header-logo">
-                    <div class="header-image">
-                        <a href="index.html"><img src="images/logo.png" alt="Weather"></a>
-                        
-                    </div>
-                    <div class="header-text">
-                        <a href="index.html"><h1>Weather</h1></a>
-                        <small>tagline goes here</small>
-                    </div>
-                </div>
-                <div id="navLinks">
-                    <div class="burger" id="bur">
-                        <span></span>
-                        <span></span>
-                        <span></span>
-                    </div>
-                    <ul>
-                        <a class="active" href="index.html"><li> Home </li></a>
-                        <a href="#"><li> News </li></a>
-                        <a href="#"><li> Live cameras </li></a>
-                        <a href="#"><li> Photo </li></a>
-                        <a href="contact.html"><li> Contact </li></a>
-                    </ul>
-                </div>
-            </div>
-            <div id="sec-ul" class="sec-ul">
-                <ul>
-                    <a class="active" href="index.html"><li> Home </li></a>
-                    <a href="#"><li> News </li></a>
-                    <a href="#"><li> Live cameras </li></a>
-                    <a href="#"><li> Photo </li></a>
-                    <a href="contact.html"><li> Contact </li></a>
-                </ul>
-            </div>
-        </nav>
+  </head>
+  <body>
+    <a class="skip-link" href="#search-input">Skip to search</a>
+
+    <header class="site-header">
+      <a class="brand" href="index.html">
+        <img src="assets/img/logo.png" alt="" width="40" height="24">
+        <span>Weather</span>
+      </a>
+
+      <div class="unit-toggle" role="group" aria-label="Temperature unit">
+        <button type="button" class="unit-btn" data-unit="c" aria-pressed="true">°C</button>
+        <button type="button" class="unit-btn" data-unit="f" aria-pressed="false">°F</button>
+      </div>
     </header>
+
     <main>
-        <section class="hero">
-            <div class="back-img"></div>
-            <div class="search-box">
-                <input id="search-input" type="search" name="search" placeholder="Find your location..">
-                <button id="search-button" type="submit">Find</button>
-            </div>
-            <div class="cards">
-                <div class="card card1">
-                    <div class="header-card">
-                        <h2>Wednesday</h2>
-                        <h2>25February</h2>
-                    </div>
-                    <div class="body-card">
-                        <div class="location">
-                            Cairo
-                        </div>
-                        <div class="degree">
-                            <div class="num">
-                                16.3<sup>o</sup>C 
-                            </div>
-                            <img src="images/113.png" alt="png">
-                        </div>
-                        <div class="custom">Party cloudy</div>
-                        <span>
-                            <img src="images/icon-umberella.png" alt="umberella">
-                            20%
-                        </span>
-                        <span>
-                            <img src="images/icon-wind.png" alt="wind">
-                            18km/h
-                        </span>
-                        <span>
-                            <img src="images/icon-compass.png" alt="compass">
-                            East
-                        </span>
-                    </div>
-                </div>
-                <div class="card card2">
-                    <div class="header-card">
-                        <h2>Wednesday</h2>
-                    </div>
-                    <div class="forecast">
-                        <div class="forecast-content">
-                            <div class="forecast-icon">
-                                <img src="images/sun.png" alt="sun">
-                            </div>
-                            <div class="degree">
-                                22.4<sup>o</sup>c
-                            </div>
-                            <small>12.7<sup>o</sup></small>
-                            <div class="custom">
-                                Sunny
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="card card3">
-                    <div class="header-card">
-                        <h2>Friday</h2>
-                    </div>
-                    <div class="forecast">
-                        <div class="forecast-content">
-                            <div class="forecast-icon">
-                                <img src="images/sun-cloud.png" alt="sun-cloud">
-                            </div>
-                            <div class="degree">
-                                19.5<sup>o</sup>c
-                            </div>
-                            <small>10.9<sup>o</sup></small>
-                            <div class="custom">
-                                Parlty Cloudy
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-    </main>
-    <footer>
-        <div>
-            <div class="site">
-                <div class="search-box">
-                    <form action="#">
-                        <input type="email" name="Email" placeholder="Enter your email to subscribe..">
-                        <button type="submit">Subscribe</button>
-                    </form>
-                </div>
-                <div class="social">
-                    <a href="#"><i class="fab fa-facebook-f"></i></a>
-                    <a href="#"><i class="fab fa-twitter"></i></a>
-                    <a href="#"><i class="fab fa-instagram"></i></a>
-                    <a href="#"><i class="fab fa-linkedin-in"></i></a>
-                </div>
-            </div>
-            <p>© 2024 Weather App. All rights reserved.</p>
+      <section class="hero" aria-labelledby="page-title">
+        <h1 id="page-title">Three-day forecast</h1>
+
+        <form id="search-form" class="search" role="search" autocomplete="off">
+            <label class="sr-only" for="search-input">Search for a city</label>
+            <input id="search-input" class="search__input" type="search" name="q"
+              placeholder="Search for a city"
+              maxlength="80" spellcheck="false" autocapitalize="off"
+              role="combobox" aria-autocomplete="list" aria-expanded="false"
+              aria-controls="suggestions" aria-haspopup="listbox">
+            <button class="search__submit" type="submit">Search</button>
+            <ul id="suggestions" class="suggestions" role="listbox" aria-label="City suggestions" hidden></ul>
+        </form>
+
+        <button type="button" id="locate-btn" class="link-btn">Use my location</button>
+      </section>
+
+      <div class="wrap">
+        <div id="notice" class="notice" role="status" aria-live="polite" hidden>
+          <p id="notice-text"></p>
+          <button type="button" id="retry-btn" class="notice__action">Try again</button>
         </div>
+
+        <div id="cards" class="cards" aria-busy="false">
+          <article class="card card--today" aria-labelledby="today-name">
+            <header class="card__head">
+              <h2 id="today-name">–</h2>
+              <p><time id="today-date">–</time></p>
+            </header>
+            <div class="card__body">
+              <p class="place" id="place">Loading…</p>
+              <div class="temp-row">
+                <p class="temp"><span id="today-temp">–</span><span class="temp__unit" id="today-unit">°C</span></p>
+                <img id="today-icon" class="icon icon--lg" src="assets/img/fallback-icon.png" alt="" width="90" height="90">
+              </div>
+              <p class="condition" id="today-condition">&nbsp;</p>
+              <p class="muted" id="today-feels">&nbsp;</p>
+              <ul class="meta">
+                <li title="Chance of rain">
+                  <img src="assets/img/icon-rain.png" alt="" width="21" height="21">
+                  <span class="sr-only">Chance of rain: </span><span id="today-rain">–</span>
+                </li>
+                <li title="Wind speed">
+                  <img src="assets/img/icon-wind.png" alt="" width="23" height="21">
+                  <span class="sr-only">Wind speed: </span><span id="today-wind">–</span>
+                </li>
+                <li title="Wind direction">
+                  <img src="assets/img/icon-compass.png" alt="" width="21" height="21">
+                  <span class="sr-only">Wind direction: </span><span id="today-dir">–</span>
+                </li>
+              </ul>
+              <p class="muted muted--small" id="today-updated">&nbsp;</p>
+            </div>
+          </article>
+
+          <article class="card card--day" data-day="1" aria-labelledby="day1-name">
+            <header class="card__head"><h2 id="day1-name" data-field="name">–</h2></header>
+            <div class="card__body">
+              <img class="icon" data-field="icon" src="assets/img/fallback-icon.png" alt="" width="48" height="48">
+              <p class="hi"><span class="sr-only">High: </span><span data-field="max">–</span></p>
+              <p class="lo"><span class="sr-only">Low: </span><span data-field="min">–</span></p>
+              <p class="condition condition--sm" data-field="text">&nbsp;</p>
+              <p class="muted muted--small"><span data-field="rain">–</span></p>
+            </div>
+          </article>
+
+          <article class="card card--day" data-day="2" aria-labelledby="day2-name">
+            <header class="card__head"><h2 id="day2-name" data-field="name">–</h2></header>
+            <div class="card__body">
+              <img class="icon" data-field="icon" src="assets/img/fallback-icon.png" alt="" width="48" height="48">
+              <p class="hi"><span class="sr-only">High: </span><span data-field="max">–</span></p>
+              <p class="lo"><span class="sr-only">Low: </span><span data-field="min">–</span></p>
+              <p class="condition condition--sm" data-field="text">&nbsp;</p>
+              <p class="muted muted--small"><span data-field="rain">–</span></p>
+            </div>
+          </article>
+        </div>
+
+        <p id="status" class="sr-only" role="status" aria-live="polite"></p>
+        <noscript><p class="notice">This forecast needs JavaScript. Enable it and reload the page.</p></noscript>
+      </div>
+    </main>
+
+    <footer class="site-footer">
+      <p>Built by Mohamed Khalel as a DEPI training project.</p>
+      <p>
+        <a href="https://github.com/medokalel/weather-forecast-app" rel="noopener">Source on GitHub</a>
+        &nbsp;|&nbsp;
+        <a href="https://www.weatherapi.com/" title="Free Weather API" rel="noopener">Powered by WeatherAPI.com</a>
+      </p>
     </footer>
+
     <script src="js/config.js"></script>
-    <script src="js/script.js"></script>
-</body>
+    <script src="js/app.js"></script>
+  </body>
 </html>
